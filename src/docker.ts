@@ -61,11 +61,20 @@ export async function loginECR(registry: string, username: string, password: str
   } else {
     core.info(`AWS ECR detected with ${region} region`);
   }
+  if ('AWS_ACCESS_KEY_ID' in process.env) {
+    core.info(`Detected AWS_ACCESS_KEY_ID`);
+  }
+
+  if ('AWS_SECRET_ACCESS_KEY' in process.env) {
+    core.info(`Detected AWS_SECRET_ACCESS_KEY`);
+  }
 
   if (username) {
+    core.info(`Setting AWS_ACCESS_KEY_ID to username`);
     process.env.AWS_ACCESS_KEY_ID = username;
   }
   if (password) {
+    core.info(`Setting AWS_SECRET_ACCESS_KEY to password`);
     process.env.AWS_SECRET_ACCESS_KEY = password;
   }
 
